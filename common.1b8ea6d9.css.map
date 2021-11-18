@@ -1,1 +1,0 @@
-{"version":3,"sources":["common.css"],"names":[],"mappings":"AAIA,WAHE,WAOF,CAJA,MAEE,YAAa,CACb,6BACF","file":"common.1b8ea6d9.css","sourceRoot":"../src","sourcesContent":[".img {\n  width: 350px;\n}\n\n.info {\n  width: 350px;\n  display: flex;\n  justify-content: space-between;\n}\n"]}

@@ -1,0 +1,2 @@
+*{box-sizing:border-box}.img,.info{width:300px}.info{display:flex;justify-content:space-between}.info-item{text-align:center}.gallery{display:flex;flex-wrap:wrap;padding:0;margin:-5px 0 0 -5px}.photo-card{flex-basis:calc(25% - 10px);margin-top:5px;margin-left:5px}
+/*# sourceMappingURL=/parcel-project-template/common.3ddb6cdf.css.map */
