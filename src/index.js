@@ -31,6 +31,8 @@ btnSearch.addEventListener('click', (event) => {
         
         lightbox.refresh();
     });
+
+    options.pageNumber += 1;
 });
 
 function getPhotos({ name, pageNumber}) {
@@ -39,23 +41,23 @@ function getPhotos({ name, pageNumber}) {
 
 function renderImages(image) {
     const markup = `<div class="photo-card">
-                      <a href="${image.largeImageURL}"><img src="${image.webformatURL}" alt="${image.tags}" loading="lazy" /></a>
+                      <a href="${image.largeImageURL}"><img src="${image.webformatURL}" alt="${image.tags}" loading="lazy" class="img"/></a>
                       <div class="info">
                         <p class="info-item">
                           <b>Likes</b>
-                          ${image.likes}
+                          <br><span>${image.likes}</span>
                         </p>
                         <p class="info-item">
                           <b>Views</b>
-                          ${image.views}
+                          <br><span>${image.views}</span>
                         </p>
                         <p class="info-item">
                           <b>Comments</b>
-                          ${image.comments}
+                          <br><span>${image.comments}</span>
                         </p>
                         <p class="info-item">
                           <b>Downloads</b>
-                          ${image.downloads}
+                          <br><span>${image.downloads}</span>
                         </p>
                       </div>
                     </div>`

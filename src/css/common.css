@@ -1,0 +1,9 @@
+.img {
+  width: 350px;
+}
+
+.info {
+  width: 350px;
+  display: flex;
+  justify-content: space-between;
+}
