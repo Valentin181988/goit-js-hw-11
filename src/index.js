@@ -1,11 +1,14 @@
 import './sass/main.scss';
 import axios from 'axios';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import SimpleLightbox from "simplelightbox";
+import 'simplelightbox/dist/simple-lightbox.min.css';
 const BASE_URL = 'https://pixabay.com/api/?key=24403049-2d622057a7d1ef54c20b3a063';
 
 const input = document.querySelector("input[name=searchQuery]");
 const btnSearch = document.querySelector(".search");
 const gallery = document.querySelector(".gallery");
+const lightbox = new SimpleLightbox(".photo-card a");
 
 btnSearch.addEventListener('click', (event) => {
     event.preventDefault();
@@ -15,15 +18,18 @@ btnSearch.addEventListener('click', (event) => {
     }
       
     getPhotos(options).then((response) => {
+        console.log(response)
         if (response.data.total === 0) {
             Notify.failure("Sorry, there are no images matching your search query. Please try again.");
             return;
         }
         Notify.success(`We have found ${response.data.totalHits} images`);
 
+        response.data.hits.map((image) => {
+            renderImages(image);
+        }).join();
         
-
-        renderImages()
+        lightbox.refresh();
     });
 });
 
@@ -33,7 +39,7 @@ function getPhotos({ name, pageNumber}) {
 
 function renderImages(image) {
     const markup = `<div class="photo-card">
-                      <img src="${image.webformatURL}" alt="${image.tags}" loading="lazy" />
+                      <a href="${image.largeImageURL}"><img src="${image.webformatURL}" alt="${image.tags}" loading="lazy" /></a>
                       <div class="info">
                         <p class="info-item">
                           <b>Likes</b>
@@ -55,6 +61,7 @@ function renderImages(image) {
                     </div>`
     gallery.insertAdjacentHTML('beforeend', markup);
 }
+
 
 
 
