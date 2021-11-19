@@ -31,3 +31,17 @@
   margin-top: 5px;
   margin-left: 5px;
 }
+
+.load-more {
+  display: block;
+  margin-top: 20px;
+  align-items: center;
+}
+
+.show {
+  opacity: 1;
+}
+
+.hide {
+  opacity: 0;
+}
