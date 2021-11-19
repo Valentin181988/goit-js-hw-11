@@ -2,11 +2,12 @@ import './sass/main.scss';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import API from './get-api';
 import galleryPhotos from './renderGallery';
+import scroll from './scroll';
 
 const input = document.querySelector("input[name=searchQuery]");
 const btnSearch = document.querySelector(".search");
 const gallery = document.querySelector(".gallery");
-const loadMorePhotos = document.querySelector(".load-more");
+/* const loadMorePhotos = document.querySelector(".load-more"); */
 let currentPageNumber = 1;
 
 btnSearch.disabled = true;
@@ -68,19 +69,12 @@ function getMorePhotos(options, onResponse) {
   });
 }
 
-function scrollSmooth() {
-   const { height: cardHeight } = gallery.firstElementChild.getBoundingClientRect();
 
-    window.scrollBy({
-         top: cardHeight * 2,
-         behavior: 'smooth',
-    });
-}
 
 function showMorePhotos(response) {
     /* showBtn(); */
   galleryPhotos.renderGallery(response.data.hits);
-  scrollSmooth(); 
+  scroll.scrollSmooth(); 
 };
 
 
