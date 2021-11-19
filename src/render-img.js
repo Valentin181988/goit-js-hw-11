@@ -1,6 +1,6 @@
 const gallery = document.querySelector(".gallery");
 
-function renderImages(image) {
+function renderImage(image) {
   const markup = `<div class="photo-card">
                         <a href="${image.largeImageURL}"><img src="${image.webformatURL}" alt="${image.tags}" loading="lazy" class="img"/></a>
                          <div class="info">
@@ -25,4 +25,4 @@ function renderImages(image) {
   gallery.insertAdjacentHTML('beforeend', markup);
 }
 
-export default { renderImages }
+export default { renderImage }
