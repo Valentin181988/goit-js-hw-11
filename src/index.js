@@ -31,7 +31,7 @@ btnSearch.addEventListener('click', (event) => {
     /* showBtn(); */
     galleryPhotos.renderGallery(response.data.hits);
   }).catch(() => {
-    Notify.failure("Sorry, an Error has occurred!")
+    Notify.failure("We're sorry, but you've reached the end of search results.")
   });
 });
 
