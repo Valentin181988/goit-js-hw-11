@@ -1,2 +1,0 @@
-*{box-sizing:border-box}.img,.info{width:300px}.info{display:flex;justify-content:space-between}.info-item{text-align:center}.gallery{display:flex;flex-wrap:wrap;padding:0;margin:-5px 0 0 -5px}.photo-card{flex-basis:calc(25% - 10px);margin-top:5px;margin-left:5px}.load-more{display:block;margin-top:20px;align-items:center}.show{opacity:1}.hide{opacity:0}
-/*# sourceMappingURL=/goit-js-hw-11/common.7099338a.css.map */
