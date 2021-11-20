@@ -20,7 +20,7 @@ function renderImage(image) {
                              <b>Downloads</b>
                              <br><span>${image.downloads}</span>
                            </p>
-                         </div>
+                         </div> 
                    </div>`
   gallery.insertAdjacentHTML('beforeend', markup);
 }
