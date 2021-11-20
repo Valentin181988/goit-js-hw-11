@@ -65,7 +65,7 @@ function getMorePhotos(options, onResponse) {
   API.getPhotos(options)
     .then(onResponse)
     .catch(() => {
-    Notify.failure("We're sorry, but you've reached the end of search results.")
+    Notify.info("We're sorry, but you've reached the end of search results.")
   });
 }
 
