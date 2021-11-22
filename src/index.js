@@ -46,18 +46,6 @@ input.addEventListener('input', () => {
   }
 });
 
-
-/* document.onscroll = function() {
-    if(document.documentElement.scrollTop + window.innerHeight == document.documentElement.scrollHeight){
-       const options = {
-          name: input.value.trim(),
-          pageNumber: currentPageNumber += 1
-      }
-
-      getMorePhotos(options, showMorePhotos);
-    }
-} */
-
  window.addEventListener('scroll', () => {
     const {
         scrollTop,
