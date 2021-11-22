@@ -46,16 +46,34 @@ input.addEventListener('input', () => {
   }
 });
 
-document.onscroll = function() {
+
+/* document.onscroll = function() {
     if(document.documentElement.scrollTop + window.innerHeight == document.documentElement.scrollHeight){
        const options = {
           name: input.value.trim(),
           pageNumber: currentPageNumber += 1
       }
-      
+
       getMorePhotos(options, showMorePhotos);
     }
-}
+} */
+
+ window.addEventListener('scroll', () => {
+    const {
+        scrollTop,
+        scrollHeight,
+        clientHeight
+    } = document.documentElement;
+
+    if (scrollTop + clientHeight >= scrollHeight - 5) {
+        const options = {
+          name: input.value.trim(),
+          pageNumber: currentPageNumber += 1
+      }
+
+      getMorePhotos(options, showMorePhotos);
+    }
+});
 
 function resetImages() {
   gallery.innerHTML = "";

@@ -1,4 +1,4 @@
-import renderImg from './renderImages';
+import renderImg from './renderImage';
 import SimpleLightbox from "simplelightbox";
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
