@@ -19,10 +19,10 @@ btnSearch.addEventListener('click', (event) => {
     const options = {
         name: input.value.trim(),
         pageNumber: currentPageNumber
-    }
+  }
       
   API.getPhotos(options).then((response) => {
-    
+
     if (response.data.total === 0) {
       Notify.failure("Sorry, there are no images matching your search query. Please try again.");
       return;
@@ -30,6 +30,10 @@ btnSearch.addEventListener('click', (event) => {
     Notify.success(`We have found ${response.data.totalHits} images`);
     /* showBtn(); */
     galleryPhotos.renderGallery(response.data.hits);
+    setTimeout(() => {
+      infiniteScrollInit()
+    }, 1000);
+    
   }).catch(() => {
     Notify.failure("Sorry, an Error has occurred!")
   });
@@ -46,28 +50,12 @@ input.addEventListener('input', () => {
   }
 });
 
- window.addEventListener('scroll', () => {
-    const {
-        scrollTop,
-        scrollHeight,
-        clientHeight
-    } = document.documentElement;
-
-    if (scrollTop + clientHeight >= scrollHeight - 5) {
-        const options = {
-          name: input.value.trim(),
-          pageNumber: currentPageNumber += 1
-      }
-
-      getMorePhotos(options, showMorePhotos);
-    }
-});
-
 function resetImages() {
   gallery.innerHTML = "";
 }
 
 function getMorePhotos(options, onResponse) {
+
   API.getPhotos(options)
     .then(onResponse)
     .catch(() => {
@@ -80,6 +68,27 @@ function showMorePhotos(response) {
   galleryPhotos.renderGallery(response.data.hits);
   scroll.scrollSmooth(); 
 };
+
+function infiniteScrollInit() {
+
+  const markup = `<div id="scroll-trigger"></div>`
+  gallery.insertAdjacentHTML('afterend', markup);
+
+  let observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+              const options = {
+                    name: input.value.trim(),
+                    pageNumber: currentPageNumber += 1
+              }
+
+              getMorePhotos(options, showMorePhotos);
+          }
+      });
+  });
+  
+  observer.observe(document.querySelector('#scroll-trigger'));
+}
 
 
 

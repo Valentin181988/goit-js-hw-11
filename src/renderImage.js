@@ -1,7 +1,5 @@
-const gallery = document.querySelector(".gallery");
-
 function renderImage(image) {
-  const markup = `<div class="photo-card">
+  return `<div class="photo-card">
                         <a href="${image.largeImageURL}"><img src="${image.webformatURL}" alt="${image.tags}" loading="lazy" class="img"/></a>
                          <div class="info">
                            <p class="info-item">
@@ -20,9 +18,8 @@ function renderImage(image) {
                              <b>Downloads</b>
                              <br><span>${image.downloads}</span>
                            </p>
-                         </div> 
+                         </div>
                    </div>`
-  gallery.insertAdjacentHTML('beforeend', markup);
 }
 
 export default { renderImage }
