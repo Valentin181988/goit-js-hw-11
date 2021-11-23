@@ -3,11 +3,14 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import API from './get-api';
 import galleryPhotos from './renderGallery';
 import scroll from './scroll';
+import throttle from 'lodash.throttle';
 
 const input = document.querySelector("input[name=searchQuery]");
 const btnSearch = document.querySelector(".search");
 const gallery = document.querySelector(".gallery");
 /* const loadMorePhotos = document.querySelector(".load-more"); */
+const throttled = throttle(getMorePhotos, 300);
+
 let currentPageNumber = 1;
 
 btnSearch.disabled = true;
@@ -54,7 +57,11 @@ function resetImages() {
   gallery.innerHTML = "";
 }
 
-function getMorePhotos(options, onResponse) {
+function getMorePhotos(onResponse) {
+  const options = {
+          name: input.value.trim(),
+          pageNumber: currentPageNumber += 1
+  }
 
   API.getPhotos(options)
     .then(onResponse)
@@ -76,14 +83,9 @@ function infiniteScrollInit() {
 
   let observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-              const options = {
-                    name: input.value.trim(),
-                    pageNumber: currentPageNumber += 1
-              }
-
-              getMorePhotos(options, showMorePhotos);
-          }
+        if (entry.isIntersecting) {          
+          throttled(showMorePhotos);
+        }
       });
   });
   
