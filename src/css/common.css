@@ -8,8 +8,10 @@ a {
 
 .img {
   display: block;
-  max-width: 100%;
-  height: auto;
+  max-width: 300px;
+  min-width: 300px;
+  min-height: 199.688px;
+  max-height: 199.688px;
 }
 
 .info {
