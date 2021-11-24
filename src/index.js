@@ -19,10 +19,10 @@ btnSearch.disabled = true;
 btnSearch.addEventListener('click', (event) => {
   event.preventDefault();
   resetImages();
-
+  
     const options = {
         name: input.value.trim(),
-        pageNumber: currentPageNumber
+        pageNumber: 1
   }
       
   API.getPhotos(options).then((response) => {
