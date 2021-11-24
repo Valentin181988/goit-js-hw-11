@@ -10,6 +10,7 @@ const btnSearch = document.querySelector(".search");
 const gallery = document.querySelector(".gallery");
 /* const loadMorePhotos = document.querySelector(".load-more"); */
 const throttled = throttle(getMorePhotos, 300);
+let observer = null;
 
 let currentPageNumber = 1;
 
@@ -33,10 +34,12 @@ btnSearch.addEventListener('click', (event) => {
     Notify.success(`We have found ${response.data.totalHits} images`);
     /* showBtn(); */
     galleryPhotos.renderGallery(response.data.hits);
-    setTimeout(() => {
-      infiniteScrollInit()
-    }, 1000);
-    
+
+    if (response.data.total !== response.data.totalHits) {
+        setTimeout(() => {
+           infiniteScrollInit()
+        }, 1000);
+    }
   }).catch(() => {
     Notify.failure("Sorry, an Error has occurred!")
   });
@@ -65,13 +68,22 @@ function getMorePhotos(onResponse) {
 
   API.getPhotos(options)
     .then(onResponse)
-    .catch(() => {
-    Notify.info("We're sorry, but you've reached the end of search results.")
-  });
+    .catch((error) => {
+      if (error.response.status === 400) {
+          observer.disconnect();
+          Notify.info("We're sorry, but you've reached the end of search results.")
+      }
+    });
 }
 
 function showMorePhotos(response) {
-    /* showBtn(); */
+  /* showBtn(); */
+  if (response.data.hits.length === 0) {
+    observer.disconnect();
+    Notify.info("We're sorry, but you've reached the end of search results.");
+    return;
+  }
+
   galleryPhotos.renderGallery(response.data.hits);
   scroll.scrollSmooth(); 
 };
@@ -81,7 +93,7 @@ function infiniteScrollInit() {
   const markup = `<div id="scroll-trigger"></div>`
   gallery.insertAdjacentHTML('afterend', markup);
 
-  let observer = new IntersectionObserver((entries) => {
+  observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {          
           throttled(showMorePhotos);
