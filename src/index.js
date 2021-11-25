@@ -19,6 +19,10 @@ btnSearch.disabled = true;
 btnSearch.addEventListener('click', (event) => {
   event.preventDefault();
 
+  if (observer !== null) {
+    observer.disconnect();
+  }
+
   resetImages();
 
   currentPageNumber = 1;
