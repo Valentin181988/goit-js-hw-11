@@ -19,13 +19,7 @@ btnSearch.disabled = true;
 btnSearch.addEventListener('click', (event) => {
   event.preventDefault();
 
-  if (observer !== null) {
-    observer.disconnect();
-  }
-
-  resetImages();
-
-  currentPageNumber = 1;
+  resetRequest();
 
   const options = {
         name: input.value.trim(),
@@ -62,10 +56,6 @@ input.addEventListener('input', () => {
       btnSearch.disabled = false;
   }
 });
-
-function resetImages() {
-  gallery.innerHTML = "";
-}
 
 function getMorePhotos(onResponse) {
   const options = {
@@ -110,6 +100,18 @@ function infiniteScrollInit() {
   
   observer.observe(document.querySelector('#scroll-trigger'));
 }
+
+function resetRequest() {
+  if (observer !== null) {
+    observer.disconnect();
+  }
+
+  gallery.innerHTML = "";
+
+  currentPageNumber = 1;
+}
+
+
 
 
 
